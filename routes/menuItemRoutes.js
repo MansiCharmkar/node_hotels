@@ -30,19 +30,20 @@ router.get('/', async(req, res) => {
 })
 
 router.get('/:tasteType', async(req, res) => {
-    try {
+        try {
 
-        const tasteType = req.params.tasteType;
-        if (tasteType == 'sweet' || tasteType == 'sour' || tasteType == 'spicy') {
-            const response = await Menu.find({ taste: tasteType })
-            console.log('response fetched')
-            res.status(200).json(response)
-        } else {
-            res.status(404).json({ error: 'Invalid taste type' })
+            const tasteType = req.params.tasteType;
+            if (tasteType == 'sweet' || tasteType == 'sour' || tasteType == 'spicy') {
+                const response = await Menu.find({ taste: tasteType })
+                console.log('response fetched')
+                res.status(200).json(response)
+            } else {
+                res.status(404).json({ error: 'Invalid taste type' })
+            }
+        } catch (err) {
+            console.log(err)
+            res.status(404).json({ error: 'Internal Server Error' })
         }
-    } catch (err) {
-        console.log(err)
-        res.status(404).json({ error: 'Internal Server Error' })
-    }
-})
+    })
+    //comment added for testing purpose
 module.exports = router;
